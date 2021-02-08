@@ -1,6 +1,6 @@
 import Header from './components/Navbar';
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
 import GameBox from './components/GameBox';
 import SpinTable from './components/SpinTable';
@@ -45,6 +45,20 @@ function App() {
     checkIfWon([a, b, c]);
   }
 
+  useEffect(() => {
+    const currUser = JSON.parse(localStorage.getItem('user'));
+
+    if (currUser) {
+      setUserName(currUser.userName);
+      setWinningAmount(currUser.winningAmount);
+      setLoggedin(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify({ userName, winningAmount }));
+  }, [winningAmount]);
+
   const checkIfWon = (res) => {
     res.sort();
     console.log(res[0], res[1], res[2])
@@ -61,7 +75,7 @@ function App() {
     } else {
       setWinningAmount(winningAmount + 0 - 1);
     }
-    console.log(res, "won:", winningAmount);
+
   }
 
   const login = (userName) => {
@@ -85,7 +99,10 @@ function App() {
     setSpinHistory([]);
     setRes(['-', '-', '-']);
 
+    localStorage.setItem('user', JSON.stringify({ userName, winningAmount }));
+
   }
+
   const resetSpin = () => {
     setRes(['7', '7', '7']);
   }
@@ -103,6 +120,8 @@ function App() {
     setWinningAmount(0);
     setUserName("Guest");
     setRes(['-', '-', '-']);
+
+    localStorage.removeItem('user');
   }
 
   const sortBy = (val) => {
