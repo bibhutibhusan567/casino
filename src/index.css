@@ -11,3 +11,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.avtar{
+  height: 40px;
+  border-radius: 10px;
+}
+
+.slide{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+.button{
+  margin:10px;
+}
+
+.slideBox{
+  border:1px solid black;
+  width:25%;
+border-radius: 15%;
+}
+
+.footer{
+  height:2rem;
+  width: 100%;
+  background-color: gray;
+  position: fixed;
+  color: white;
+  bottom: 0;
+  padding: 5px;
+}
+.gamecard{
+  width: 70%;
+    margin: 20px auto;
+}
