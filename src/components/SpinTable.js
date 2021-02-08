@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Table } from 'reactstrap'
+import { Button, Table } from 'reactstrap'
 
 export default function SpinTable(props) {
     return (
@@ -8,7 +8,9 @@ export default function SpinTable(props) {
             <thead>
                 <tr>
                     <th>
-                        Id
+                        <Button onClick={() => props.sortBy("id")}>
+                            Id
+                        </Button>
                     </th>
                     <th>
                         Slot 1
@@ -19,7 +21,7 @@ export default function SpinTable(props) {
                     <th>
                         Slot 3
                     </th>
-                    <th>Time</th>
+                    <th><Button onClick={() => props.sortBy("time")}>Time</Button> </th>
 
                 </tr>
             </thead>

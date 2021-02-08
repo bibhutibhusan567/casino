@@ -1,6 +1,6 @@
 import Header from './components/Navbar';
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'reactstrap';
 import GameBox from './components/GameBox';
 import SpinTable from './components/SpinTable';
@@ -13,9 +13,11 @@ function App() {
   const [res, setRes] = useState(['-', '-', '-']);
   const [spinHistory, setSpinHistory] = useState([]);
   const [winningAmount, setWinningAmount] = useState(0);
+  const [incId, setIncId] = useState(false);
+  const [incTime, setIncTime] = useState(false);
 
   const nextSpin = () => {
-    if (winningAmount < 1) {
+    if (winningAmount < 1 && loggedin) {
       return;
     }
 
@@ -103,6 +105,25 @@ function App() {
     setRes(['-', '-', '-']);
   }
 
+  const sortBy = (val) => {
+    if (val === "id") {
+      if (incId) {
+        spinHistory.sort((a, b) => a.id - b.id);
+      } else {
+        spinHistory.sort((a, b) => b.id - a.id);
+      }
+      setIncId(!incId);
+    } else {
+      if (incTime) {
+        spinHistory.sort((a, b) => a.date - b.date);
+      } else {
+        spinHistory.sort((a, b) => b.date - a.date);
+      }
+      setIncTime(!incTime);
+    }
+    setSpinHistory([...spinHistory]);
+  }
+
   return (
     <>
       <div className="App">
@@ -116,7 +137,7 @@ function App() {
           <GameBox res={res} startGame={startGame} resetSpin={resetSpin} setStartGame={setStartGame} nextSpin={nextSpin} />
         </div>
         {
-          spinHistory.length > 0 ? (<SpinTable spinHistory={spinHistory} />) : null
+          spinHistory.length > 0 ? (<SpinTable spinHistory={spinHistory} sortBy={sortBy} />) : null
         }
         <Footer />
       </div>
