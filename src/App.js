@@ -124,6 +124,10 @@ function App() {
     setSpinHistory([...spinHistory]);
   }
 
+  const start = () => {
+    setStartGame(false);
+  }
+
   return (
     <>
       <div className="App">
@@ -134,7 +138,7 @@ function App() {
         ) : null}
 
         <div className="gamecard">
-          <GameBox res={res} startGame={startGame} resetSpin={resetSpin} setStartGame={setStartGame} nextSpin={nextSpin} />
+          <GameBox res={res} startGame={startGame} resetSpin={resetSpin} start={start} nextSpin={nextSpin} />
         </div>
         {
           spinHistory.length > 0 ? (<SpinTable spinHistory={spinHistory} sortBy={sortBy} />) : null

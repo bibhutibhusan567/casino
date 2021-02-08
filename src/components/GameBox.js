@@ -26,7 +26,7 @@ export default function GameBox(props) {
                                 className="button"
                             >Reset</Button>
                             <Button
-                                onClick={() => props.setStartGame(false)}
+                                onClick={props.start}
                                 className="button"
                             > Close Game</Button>
                         </div>
